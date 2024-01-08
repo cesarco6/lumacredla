@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::view('/', 'integrated');
+/*
+Route::view('/', 'index')->name('inicio');
+Route::view('/voucher', 'comprobante')->name('comprobante');
+Route::view('/company', 'empresa')->name('empresa');
+Route::view('/numcredentials', 'numerocredenciales')->name('credenciales');
+Route::view('/confirm', 'confirmar')->name('confirmacion');
+*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
