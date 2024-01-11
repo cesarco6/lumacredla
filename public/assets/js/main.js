@@ -1,33 +1,34 @@
-$(function() {
-
-    $('html').click(function() {
-        $('.select .dropdown').hide();
+$(function () {
+    $("html").click(function () {
+        $(".select .dropdown").hide();
     });
-    
-    $('.select').click(function(event) {
+
+    $(".select").click(function (event) {
         event.stopPropagation();
     });
-    
-    $('.select .select-control').click(function() {
+
+    $(".select .select-control").click(function () {
         $(this).parent().next().toggle();
-    })
-    
-    $('.select .dropdown li').click(function() {
+    });
+
+    $(".select .dropdown li").click(function () {
         $(this).parent().toggle();
-        var text = $(this).attr('rel');
-        $(this).parent().prev().find('div').text(text);
-    })
+        var text = $(this).attr("rel");
+        $(this).parent().prev().find("div").text(text);
+    });
 
     $('[data-toggle="tooltip"]').tooltip();
 
-
-    $(document).ready(function() {
-        $(".custom-file-input").on("change", function() {
+    $(document).ready(function () {
+        $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            $(this)
+                .siblings(".custom-file-label")
+                .addClass("selected")
+                .html(fileName);
         });
 
-        $('#slider-service').slick({
+        $("#slider-service").slick({
             dots: true,
             rows: 2,
             arrows: false,
@@ -36,56 +37,52 @@ $(function() {
             slidesToShow: 3,
             slidesToScroll: 3,
             responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    rows: 2,
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    rows: 1,
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    rows: 1,
-                    dots: false,
-                    arrows: true,
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-            ]
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        rows: 2,
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true,
+                    },
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        rows: 1,
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                    },
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        rows: 1,
+                        dots: false,
+                        arrows: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    },
+                },
+            ],
         });
-
     });
-
-
-})
-
+});
 
 const DOMstrings = {
-    stepsBtnClass: 'multisteps-form__progress-btn',
+    stepsBtnClass: "multisteps-form__progress-btn",
     stepsBtns: document.querySelectorAll(`.multisteps-form__progress-btn`),
-    stepsBar: document.querySelector('.multisteps-form__progress'),
-    stepsForm: document.querySelector('.multisteps-form__form'),
-    stepFormPanelClass: 'multisteps-form__panel',
-    stepFormPanels: document.querySelectorAll('.multisteps-form__panel'),
-    stepPrevBtnClass: 'js-btn-prev',
-    stepNextBtnClass: 'js-btn-next'
+    stepsBar: document.querySelector(".multisteps-form__progress"),
+    stepsForm: document.querySelector(".multisteps-form__form"),
+    stepFormPanelClass: "multisteps-form__panel",
+    stepFormPanels: document.querySelectorAll(".multisteps-form__panel"),
+    stepPrevBtnClass: "js-btn-prev",
+    stepNextBtnClass: "js-btn-next",
 };
 
 const removeClasses = (elemSet, className) => {
-    elemSet.forEach(elem => {
+    elemSet.forEach((elem) => {
         elem.classList.remove(className);
     });
 };
@@ -98,44 +95,49 @@ const findParent = (elem, parentClass) => {
     return currentNode;
 };
 
-const getActiveStep = elem => {
+const getActiveStep = (elem) => {
     return Array.from(DOMstrings.stepsBtns).indexOf(elem);
 };
 
-const setActiveStep = activeStepNum => {
-    removeClasses(DOMstrings.stepsBtns, 'js-active');
+const setActiveStep = (activeStepNum) => {
+    removeClasses(DOMstrings.stepsBtns, "js-active");
     DOMstrings.stepsBtns.forEach((elem, index) => {
         if (index <= activeStepNum) {
-            elem.classList.add('js-active');
+            elem.classList.add("js-active");
         }
-
     });
 };
 
 const getActivePanel = () => {
     let activePanel;
-    DOMstrings.stepFormPanels.forEach(elem => {
-        if (elem.classList.contains('js-active')) {
+    DOMstrings.stepFormPanels.forEach((elem) => {
+        if (elem.classList.contains("js-active")) {
             activePanel = elem;
         }
     });
     return activePanel;
 };
 
-const setActivePanel = activePanelNum => {
-    const animation = $(DOMstrings.stepFormPanels, 'js-active').attr("data-animation");
+const setActivePanel = (activePanelNum) => {
+    const animation = $(DOMstrings.stepFormPanels, "js-active").attr(
+        "data-animation"
+    );
 
-    removeClasses(DOMstrings.stepFormPanels, 'js-active');
+    removeClasses(DOMstrings.stepFormPanels, "js-active");
     removeClasses(DOMstrings.stepFormPanels, animation);
-    removeClasses(DOMstrings.stepFormPanels, 'animate__animated');
+    removeClasses(DOMstrings.stepFormPanels, "animate__animated");
 
     DOMstrings.stepFormPanels.forEach((elem, index) => {
         if (index === activePanelNum) {
-            elem.classList.add('js-active');
-            elem.classList.add('animate__animated', animation);
+            elem.classList.add("js-active");
+            elem.classList.add("animate__animated", animation);
 
-            setTimeout(function() {
-                removeClasses(DOMstrings.stepFormPanels, 'animate__animated', animation);
+            setTimeout(function () {
+                removeClasses(
+                    DOMstrings.stepFormPanels,
+                    "animate__animated",
+                    animation
+                );
             }, 1200);
 
             setFormHeight(elem);
@@ -143,7 +145,7 @@ const setActivePanel = activePanelNum => {
     });
 };
 
-const formHeight = activePanel => {
+const formHeight = (activePanel) => {
     const activePanelHeight = activePanel.offsetHeight;
     DOMstrings.stepsForm.style.height = `${activePanelHeight}px`;
 };
@@ -153,7 +155,7 @@ const setFormHeight = () => {
     formHeight(activePanel);
 };
 
-DOMstrings.stepsBar.addEventListener('click', e => {
+DOMstrings.stepsBar.addEventListener("click", (e) => {
     const eventTarget = e.target;
     if (!eventTarget.classList.contains(`${DOMstrings.stepsBtnClass}`)) {
         return;
@@ -163,13 +165,32 @@ DOMstrings.stepsBar.addEventListener('click', e => {
     setActivePanel(activeStep);
 });
 
-DOMstrings.stepsForm.addEventListener('click', e => {
+DOMstrings.stepsForm.addEventListener("click", (e) => {
     const eventTarget = e.target;
-    if (!(eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`) || eventTarget.classList.contains(`${DOMstrings.stepNextBtnClass}`))) {
-        return;
+
+    if (
+        !(
+            eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`) ||
+            eventTarget.classList.contains(`${DOMstrings.stepNextBtnClass}`)
+        )
+    ) {
+        return; // Salida del manejador del boton de siguiente
     }
-    const activePanel = findParent(eventTarget, `${DOMstrings.stepFormPanelClass}`);
-    let activePanelNum = Array.from(DOMstrings.stepFormPanels).indexOf(activePanel);
+
+    const activePanel = findParent(
+        eventTarget,
+        `${DOMstrings.stepFormPanelClass}`
+    );
+
+    // Valida los input del la vista actual antes de seguir a otra vista.
+    const isValid = validateActiveViewInputs();
+    if (!isValid) {
+        return; // Salida del manejador del boton de siguiente
+    }
+
+    let activePanelNum = Array.from(DOMstrings.stepFormPanels).indexOf(
+        activePanel
+    );
     if (eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`)) {
         activePanelNum--;
     } else {
